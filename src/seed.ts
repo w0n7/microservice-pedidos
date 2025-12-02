@@ -9,9 +9,6 @@ export const createTable = async () => {
                 id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
                 user_id UUID NOT NULL,
                 order_number int GENERATED ALWAYS AS IDENTITY NOT NULL,
-                username VARCHAR(100) UNIQUE NOT NULL,
-                email VARCHAR(100) UNIQUE NOT NULL,
-                fullname VARCHAR(100) NOT NULL,
                 status VARCHAR(100)
                 create_at TIMESTAMP DEFAULT NOW()
                 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE  
@@ -21,12 +18,11 @@ export const createTable = async () => {
     await pool.query(`
             CREATE TABLE IF NOT EXISTS users (
                 id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+                username VARCHAR(100) UNIQUE NOT NULL,
+                password VARCHAR(100) NOT NULL,
                 fullname TEXT NOT NULL,
                 email TEXT UNIQUE NOT NULL,
                 phone TEXT,
-                situation TEXT NOT NULL,
-                start_date DATE,
-                closing_date DATE,
                 create_at TIMESTAMP DEFAULT NOW(),
             );
             
