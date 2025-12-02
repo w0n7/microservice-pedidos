@@ -1,6 +1,13 @@
-deploy:
-  needs: build-and-test
-  runs-on: ubuntu-latest
+name: CD Pipeline
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
 
   steps:
     - uses: actions/checkout@v3\4
